@@ -1,5 +1,3 @@
-# hello-world
-A repository for random notes and project ideas that do not currently have their own repository.
+# Hello World!
 
-### Benjamin Reynolds
-  I am a coder that is currently learning full-stack web development. On a day to day basis I write VBA and Hummingbird Basic scripts to automate proccesses for the company I am currently working for. 
+  This repository will be home to many random notes and project ideas. Mainly it is used to hold code snippets in the different languages that I use as a reference point. For example, a quick "Hello World!" script in each language I have learned. It is also used as a playground to familiarize myself with git and the github platform.
