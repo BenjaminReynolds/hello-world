@@ -1,0 +1,1 @@
+Exercises from Charles Severance's book "Python for Informatics" found at www.pythonlearn.com.

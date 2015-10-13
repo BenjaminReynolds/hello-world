@@ -1,0 +1,1 @@
+Exercises from Zed Shaw's book at www.learnpythonthehardway.org
