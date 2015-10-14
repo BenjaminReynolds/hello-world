@@ -1,1 +1,0 @@
-Django's Tutorial from www.djangoproject.com
