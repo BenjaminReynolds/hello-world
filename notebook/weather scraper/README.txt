@@ -1,0 +1,1 @@
+A simple app written in php designed to scrape weather data off of an external site to display in a locations weather in a simple user friendly format. This originally a project in Rob Percivals "Complete Web Developer" Udemy course.
