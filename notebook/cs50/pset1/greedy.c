@@ -16,17 +16,36 @@ int main(void)
 	while (input <= 0);
 	
 	// converts input to a number of cents
+	int cents = round(input);
 	
 	// initialize the return value
-	
 	int total = 0;
 	
-	// loop over the converted input, decreasing the value and increasing the
-	// return value with each iteration
+	/* loop over the converted input, decreasing the value and increasing the
+	 return value with each iteration 8 */
 	
-	while (input > 0)
+	while (cents > 0)
 	{
-		
+		if (cents > 25)
+		{
+			cents -= 25;
+			total += 1;
+		}
+		else if (cents > 10)
+		{
+			cents -= 10;
+			total += 1;
+		}
+		else if (cents > 5)
+		{
+			cents -= 5;
+			total += 1;
+		}
+		else
+		{
+			cents -= 1;
+			total += 1;
+		}
 	}
 	
 	printf("%d\n", total);
