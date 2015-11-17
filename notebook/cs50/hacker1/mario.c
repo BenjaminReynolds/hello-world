@@ -21,12 +21,12 @@ int main(void)
         
         // loop  through every cell on the given row
         
-        for (int j = 0; j <= (height * 2) + 2; j++)
+        for (int j = 0, l = (height * 2) + 1; j <= l; j++)
         {
             /* decides whether to print a space or a hash 
             depending on the current row and cell */
             
-            if (j < height - (i) || j > height + 2 + )
+            if (j == height || j == height + 1 || j > height + 2 + i || j < (l - height - 2) - i)
             {
                 printf(" ");
             }
