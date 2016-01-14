@@ -5,10 +5,14 @@ int main(void)
 {
     int n;
     
-    // gets users input
+    // gets and validates users input
     
-    printf("minutes: ");
-    n = GetInt();
+    do
+    {
+        printf("minutes: ");
+        n = GetInt();
+    }
+    while (n < 1);
     
     /* calculates number of 16 ounce bottles for a shower of n 
     minutes based on 1.5 gallons of water per minute of shower 
