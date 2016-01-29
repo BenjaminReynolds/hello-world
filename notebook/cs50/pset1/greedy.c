@@ -2,6 +2,10 @@
 #include <cs50.h>
 #include <math.h>
 
+#define QUARTER 25
+#define DIME 10
+#define NICKEL 5
+
 int main(void)
 {
 	float input;
@@ -26,19 +30,19 @@ int main(void)
 	
 	while (cents > 0)
 	{
-		if (cents >= 25)
+		if (cents >= QUARTER)
 		{
-			cents -= 25;
+			cents -= QUARTER;
 			total += 1;
 		}
-		else if (cents >= 10)
+		else if (cents >= DIME)
 		{
-			cents -= 10;
+			cents -= DIME;
 			total += 1;
 		}
-		else if (cents >= 5)
+		else if (cents >= NICKEL)
 		{
-			cents -= 5;
+			cents -= NICKEL;
 			total += 1;
 		}
 		else

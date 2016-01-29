@@ -1,6 +1,8 @@
 #include <cs50.h>
 #include <stdio.h>
 
+#define MAX_HEIGHT 23
+
 int main(void)
 {
     int height;
@@ -12,7 +14,7 @@ int main(void)
         printf("Height: ");
         height = GetInt();
     }
-    while (height < 0 || height > 23);
+    while (height < 0 || height > MAX_HEIGHT);
     
     // loop through every row of the pyramid, starting at the top
     

@@ -14,9 +14,10 @@ int main(void)
     }
     while (n < 1);
     
-    /* calculates number of 16 ounce bottles for a shower of n 
-    minutes based on 1.5 gallons of water per minute of shower 
-    and displays the result to the user */
+    /**
+     * calculates the number of bottles of water per minute that are used
+     * by a shower n minutes long and displays the result to the user.
+     **/
     
     printf("bottles: %i\n", n * 12);
 }
