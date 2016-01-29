@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <cs50.h>
 #include <string.h>
+#include <ctype.h>
 
 int main(void)
 {
@@ -14,19 +15,19 @@ int main(void)
     *   If the character at the current index is the first character of the
     *   string, or the previous character is a space, print the character.
     **/
-    for (int i = 0, n = strlen(s) ;i < n; i++)
+    for (int i = 0, n = strlen(name) ;i < n; i++)
     {
         if (name[i - 1] == ' ' || i == 0)
         {
             // If the character is already uppercased, print it as is.
-            if (name[i] < 97)
+            if (isupper(name[i]))
             {
                 printf("%c", name[i]);    
             }
             // otherwise, convert the character to an uppercase letter
             else
             {
-                printf("%c", name[i] - 32);
+                printf("%c", toupper(name[i]));
             }
         }
     }
