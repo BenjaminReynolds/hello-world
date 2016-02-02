@@ -15,7 +15,7 @@ int main(void)
     *   If the character at the current index is the first character of the
     *   string, or the previous character is a space, print the character.
     **/
-    for (int i = 0, n = strlen(name) ;i < n; i++)
+    for (int i = 0, n = strlen(name); i < n; i++)
     {
         if (name[i - 1] == ' ' || i == 0)
         {

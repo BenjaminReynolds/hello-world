@@ -7,10 +7,15 @@
 int main(int argc, string argv[])
 {
     int k;
+    
     // Ensure that the correct number of command line inputs were given
+    
     if (argc == 2)
     {
         k = strlen(argv[1]);
+        
+        // ensure that the command line input is a valid key
+        
         for (int i = 0; i < k; i++)
         {
             if (!isalpha(argv[1][i]))
@@ -28,6 +33,8 @@ int main(int argc, string argv[])
     
     string key = argv[1];
     
+    // convert the key to upper case to simplify the actual encryption code later
+    
     for (int i = 0; i < k; i++)
     {
         key[i] = toupper(key[i]);
@@ -40,7 +47,9 @@ int main(int argc, string argv[])
     * current index is a letter in the alphabet, the letter will be shifted
     * positively using the key provided at the command line. If the character is
     * not a letter, the character will be printed as is. A different algorithm 
-    * is implemented depending on whether the letter is uppercase or lowercase.
+    * is implemented depending on whether the letter is uppercase or lowercase
+    * Some math using modulo and an iterator variable is used to esure that the
+    * correct index of the key is being used
     **/
     
     for (int i = 0, j = 0, n = strlen(message); i < n; i++)
