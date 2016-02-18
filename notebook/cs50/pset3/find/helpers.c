@@ -16,15 +16,21 @@
  */
 bool search(int value, int values[], int n)
 {
-    if (n < 0)
+    int min = 0, max = n - 1;
+    while (min <= max)
     {
-        return false;
-    }
-    for (int i = 0; i < n; i++)
-    {
-        if (values[i] == value)
+        int mid = (max + min) / 2;
+        if (values[mid] == value)
         {
             return true;
+        }
+        else if(values[mid] < value)
+        {
+            min = mid + 1;
+        }
+        else
+        {
+            max = mid - 1;
         }
     }
     return false;
