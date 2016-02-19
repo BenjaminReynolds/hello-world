@@ -3,7 +3,7 @@ questions.txt
 Computer Science 50
 Problem Set 3
 
-0. TODO
-1. TODO
-2. TODO
-3. TODO
+0. The games framework will allow any dimension from 3 X 3, up to and including 9 x 9.
+1. The games board is represented with an array, more accurately a 2 dimensional array consisting of an array of n sub-arrays of length n each, where n is the argument given at the command line. 
+2. The greet() function is used to greet the player at the start of the game.
+3. The functions init, draw, move, and won must be written to complete the implementation of the game of fifteen.
