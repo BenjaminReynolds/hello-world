@@ -1,19 +1,19 @@
-0.  TODO
-1.  TODO
-2.  TODO
-3.  TODO
-4.  TODO
-5.  TODO
-6.  TODO
-7.  TODO
-8.  TODO
-9.  TODO
-10. TODO
-11. TODO
-12. TODO
-13. TODO
-14. TODO
-15. TODO
-16. TODO
-17. TODO
-18. TODO
+0.  BMP, JPEG, and PNG - 16,581,375 colors, GIF - 256 colors
+1.  GIF
+2.  Lossless compression does not degrade the quality or accuracy of the image, while lossy compression will sacrifice quality / accuracy for a smaller file size
+3.  JPEG
+4.  The OS essentially removes the reference or "pointer" to the file and marks the space on the disk that the file is on as free space, allowing it to be overwritten.
+5.  Use "sanitization" software to ensure that the data that you "delete" is overwritten by new or blank data
+6.  stdint.h is a header file that defines fixed width integer data types. This allows code to be more portable and to reliably produce the same result accross different systems.
+7.  Using uintN_t in a program ensures that the integer has the exact same number of N bits regardless of what system the code is compiled and running on.
+8.  BYTE consists of 1 byte, DWORD 4 bytes, LONG 4 bytes, and WORD 2 bytes
+9.  424d in hexadecimal or BM in ASCII
+10. bfsize represents the size of the file, while bisize represents the number of bytes required by the structure BITMAPINFOHEADER or 40 bytes, 28 in hexadecimal
+11. if biHeight is negative, then the image is read from top to bottom instead of bottom to top, i.e. the first set of three bytes is the top left pixel of the image, instead of the bottom left pixel if biHeight is positive. 
+12. biBitCount
+13. If the system is out of memory at that point in the program, or if the name for the file given at the command line is invalid.
+14. Because in each call to fread, we are only reading in one "element" of data. 
+15. 3
+16. fseek moves the read position of the file to a specified point in the file.
+17. The current read position of the file
+18. David J Malan
