@@ -32,6 +32,7 @@ int main(int argc, char* argv[])
     FILE* infile = fopen("card.raw", "r");
     BLOCK buffer;
     int counter = 0;
+    
     fread(&buffer, sizeof(BLOCK), 1, infile);
     
     while (1)
@@ -39,7 +40,7 @@ int main(int argc, char* argv[])
         if (blockCheck(buffer))
         {
             char title[7];
-            sprintf(title, "%d.jpg", counter);
+            sprintf(title, "%03d.jpg", counter);
             counter += 1;
             FILE* outfile = fopen(title, "a");
             do
@@ -47,7 +48,9 @@ int main(int argc, char* argv[])
                 fwrite(&buffer, sizeof(BLOCK), 1, outfile);
                 if (fread(&buffer, sizeof(BLOCK), 1, infile) != 1)
                 {
-                    break;
+                    fclose(outfile);
+                    fclose(infile);
+                    return 0;
                 }
             }
             while (!blockCheck(buffer));
@@ -58,9 +61,6 @@ int main(int argc, char* argv[])
             fread(&buffer, sizeof(BLOCK), 1, infile);
         }
     }
-    fclose(infile);
-    
-    return 0;
 }
 
 bool blockCheck(BLOCK toTest)
