@@ -1,1 +1,0 @@
-This directory is simply an online notebook for note taking and working through books and written tutorials

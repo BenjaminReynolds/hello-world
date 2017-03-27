@@ -1,3 +1,4 @@
-# Hello World!
+# Notebook
 
-This repository was originally created to complete the github hello world project. I will be transitioning it into what will serve more or less as a personal notebook and working directory for simple classes and tutorials. 
+Nothing to see here.
+Just a git version controlled notebook for my self guided learning.
