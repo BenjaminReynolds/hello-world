@@ -1,0 +1,4 @@
+* MOOCs
+Source and notes for any standalone (not included in [[../teach-yourself-cs/][teach yourself cs]]) MOOCs I
+have worked on.
+ 

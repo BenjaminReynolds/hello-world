@@ -1,0 +1,3 @@
+* Zed Shaw's The Hard Way series
+Source for working through any of the books in Zed Shaw's 
+https://learncodethehardway.org/ series.
