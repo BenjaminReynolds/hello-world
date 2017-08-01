@@ -1,0 +1,4 @@
+* The Rust Book
+This directory holds all of the code I will write working through the 
+second edition of [[https://doc.rust-lang.org/book/second-edition][The Rust Book]]
+
