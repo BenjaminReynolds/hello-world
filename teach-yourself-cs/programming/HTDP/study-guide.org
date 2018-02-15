@@ -1,0 +1,14 @@
+
+* TODO [[http://www.ccs.neu.edu/home/matthias/HtDP2e/][How to Design Programs]]                              :personal:compsci:
+** TODO Read [[http://www.ccs.neu.edu/home/matthias/HtDP2e/part_one.html][Part I. Fixed size data]]
+*** DONE Chapter 1. Arithmetic
+   CLOSED: [2018-01-25 Thu 16:59]
+   - State "DONE"       from "TODO"       [2018-01-25 Thu 16:59]
+*** DONE Chapter 2. Functions and Programs
+    CLOSED: [2018-02-12 Mon 16:09]
+    - State "DONE"       from "TODO"       [2018-02-12 Mon 16:09]
+*** TODO Chapter 3. How to Design Programs
+*** TODO Chapter 4. Intervals, Enumerations, and Itemizations
+*** TODO Chapter 5. Adding Structure
+*** TODO Chapter 6. Itemizations and Structures
+*** TODO Chapter 7. Summary
