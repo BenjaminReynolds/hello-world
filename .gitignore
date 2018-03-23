@@ -1,1 +1,6 @@
 /rust-book/*/target/
+/teach-yourself-cs/computer-architecture/nand2tetris/tools
+ok
+__pycache__
+.ok_storage
+.ok_history
