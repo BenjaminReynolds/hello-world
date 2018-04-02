@@ -21,7 +21,14 @@ def roll_dice(num_rolls, dice=six_sided):
     assert type(num_rolls) == int, 'num_rolls must be an integer.'
     assert num_rolls > 0, 'Must roll at least once.'
     # BEGIN PROBLEM 1
-    "*** YOUR CODE HERE ***"
+    rolls = []
+    while num_rolls > 0:
+        num_rolls -= 1
+        rolls.append(dice())
+    if 1 in rolls:
+        return 1
+    else:
+        return sum(rolls)
     # END PROBLEM 1
 
 
@@ -32,7 +39,7 @@ def free_bacon(score):
     """
     assert score < 100, 'The game should be over.'
     # BEGIN PROBLEM 2
-    "*** YOUR CODE HERE ***"
+    return abs(score % 10 - score // 10) + 2
     # END PROBLEM 2
 
 
@@ -50,14 +57,23 @@ def take_turn(num_rolls, opponent_score, dice=six_sided):
     assert num_rolls <= 10, 'Cannot roll more than 10 dice.'
     assert opponent_score < 100, 'The game should be over.'
     # BEGIN PROBLEM 3
-    "*** YOUR CODE HERE ***"
+    if num_rolls == 0:
+        return free_bacon(opponent_score)
+    else:
+        return roll_dice(num_rolls, dice)
     # END PROBLEM 3
 
 
 def is_swap(score0, score1):
     """Return whether one of the scores is an integer multiple of the other."""
     # BEGIN PROBLEM 4
-    "*** YOUR CODE HERE ***"
+    if score0 > 1 and score1 > 1:
+        if score0 > score1:
+            return score0 % score1 == 0
+        else:
+            return score1 % score0 == 0
+    else:
+        return False
     # END PROBLEM 4
 
 
@@ -96,7 +112,16 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     """
     player = 0  # Which player is about to take a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
-    "*** YOUR CODE HERE ***"
+    while score0 < goal and score1 < goal:
+        if player == 0:
+            num_rolls = strategy0(score0, score1)
+            score0 += take_turn(num_rolls, score1, dice)
+        else:
+            num_rolls = strategy1(score1, score0)
+            score1 += take_turn(num_rolls, score0, dice)
+        if is_swap(score0, score1):
+            score0, score1 = score1, score0
+        player = other(player)
     # END PROBLEM 5
     return score0, score1
 
