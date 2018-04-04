@@ -248,7 +248,13 @@ def make_averaged(fn, num_samples=1000):
     3.0
     """
     # BEGIN PROBLEM 8
-    "*** YOUR CODE HERE ***"
+    def averaged(*args):
+        total, samples = 0, num_samples
+        while samples > 0:
+            total += fn(*args)
+            samples -= 1
+        return total / num_samples
+    return averaged
     # END PROBLEM 8
 
 
@@ -262,7 +268,14 @@ def max_scoring_num_rolls(dice=six_sided, num_samples=1000):
     1
     """
     # BEGIN PROBLEM 9
-    "*** YOUR CODE HERE ***"
+    number_under_test, best_num, best_result = 1, 1, 0
+    averaged = make_averaged(roll_dice, num_samples)
+    while number_under_test <= 10:
+        result = averaged(number_under_test, dice)
+        if result > best_result:
+            best_result, best_num = result, number_under_test
+        number_under_test += 1
+    return best_num
     # END PROBLEM 9
 
 
@@ -279,15 +292,16 @@ def average_win_rate(strategy, baseline=always_roll(4)):
     """Return the average win rate of STRATEGY against BASELINE. Averages the
     winrate when starting the game as player 0 and as player 1.
     """
-    win_rate_as_player_0 = 1 - make_averaged(winner)(strategy, baseline)
-    win_rate_as_player_1 = make_averaged(winner)(baseline, strategy)
+    # Up the sample number to get a more acurate average
+    win_rate_as_player_0 = 1 - make_averaged(winner, 10000)(strategy, baseline)
+    win_rate_as_player_1 = make_averaged(winner, 10000)(baseline, strategy)
 
     return (win_rate_as_player_0 + win_rate_as_player_1) / 2
 
 
 def run_experiments():
     """Run a series of strategy experiments and report results."""
-    if True:  # Change to False when done finding max_scoring_num_rolls
+    if False:  # Change to False when done finding max_scoring_num_rolls
         six_sided_max = max_scoring_num_rolls(six_sided)
         print('Max scoring num rolls for six-sided dice:', six_sided_max)
 
@@ -304,6 +318,16 @@ def run_experiments():
         print('final_strategy win rate:', average_win_rate(final_strategy))
 
     "*** You may add additional experiments as you wish ***"
+    # print a CSV friendly output so I can copy/paste output to a spreadsheet and analyze
+    print('margin, num_rolls, win_rate')
+    for i in range(2, 12):
+        for j in range(1, 11):
+            print(i, ",", j, ",", average_win_rate(wrapped_swap_strategy(i, j)))
+
+def wrapped_swap_strategy(margin, num_rolls):
+    def wrapped(score, opponent_score, margin=margin, num_rolls=num_rolls):
+        return swap_strategy(score, opponent_score, margin=margin, num_rolls=num_rolls)
+    return wrapped
 
 
 def bacon_strategy(score, opponent_score, margin=8, num_rolls=4):
@@ -311,7 +335,7 @@ def bacon_strategy(score, opponent_score, margin=8, num_rolls=4):
     rolls NUM_ROLLS otherwise.
     """
     # BEGIN PROBLEM 10
-    return 4  # Replace this statement
+    return 0 if free_bacon(opponent_score) >= margin else num_rolls
     # END PROBLEM 10
 
 
@@ -321,17 +345,41 @@ def swap_strategy(score, opponent_score, margin=8, num_rolls=4):
     NUM_ROLLS.
     """
     # BEGIN PROBLEM 11
-    return 4  # Replace this statement
+    bacon_score = free_bacon(opponent_score)
+    post_bacon_score = score + bacon_score
+    bacon_would_swap = is_swap(post_bacon_score, opponent_score)
+    beneficial_swap = bacon_would_swap and post_bacon_score < opponent_score
+    return 0 if (bacon_score >= margin or beneficial_swap) else num_rolls
     # END PROBLEM 11
 
 
 def final_strategy(score, opponent_score):
     """Write a brief description of your final strategy.
 
-    *** YOUR DESCRIPTION HERE ***
+    By running experiments with all possible value for margin and num_rolls,
+    I determined their optimal values if using swap_strategy as is.
+    (see wrapped_swap_strategy and new experiments in run_experiments, results
+    are in swap_strategy_win_rates.csv
+
+    If a swap would win the game however, that should be the new margin.
+
+    By determining the average result for certain numbers of dice, I also determined
+    that certain numbers of dice are optimal for scores that are a certain margin away
+    from winning. (if I only need to score 3 points to win, I should only roll 1 die)
     """
     # BEGIN PROBLEM 12
-    return 4  # Replace this statement
+    if score <= 92:
+        num_rolls = 6
+    elif score <= 93:
+        num_rolls = 3
+    elif score <= 97:
+        num_rolls = 2
+    else:
+        num_rolls = 1
+
+    margin = 10 if score <= 90 else 100 - score
+
+    return swap_strategy(score, opponent_score, margin, num_rolls)
     # END PROBLEM 12
 
 
@@ -351,6 +399,7 @@ def run(*args):
     """
     import argparse
     parser = argparse.ArgumentParser(description="Play Hog")
+    t
     parser.add_argument('--run_experiments', '-r', action='store_true',
                         help='Runs strategy experiments')
 
