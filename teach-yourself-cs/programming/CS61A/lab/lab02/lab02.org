@@ -1,0 +1,48 @@
+* Question 4:
+  Try drawing an environment diagram for the following code and predict what Python will output.
+
+#+BEGIN_SRC python
+a = lambda x: x * 2 + 1
+def b(b, x):
+    return b(x + a(x))
+x = 3
+b(a, x)
+#+END_SRC
+
+** Global Frame
+   a = func λ(x) [parent=Global]
+   b = func b(b, x) [parent=Global]
+   x = 3
+** f1: b [parent=Global]
+   b = func λ(x) [parent=Global]
+   x = 3
+   return value = 21
+** f2: λ [parent=Global]
+   x = 3
+   return value = 7
+** f2: λ [parent=Global]
+   x = 10
+   return value = 21
+
+* Question 4:
+  Try drawing an environment diagram for the following code and predict what Python will output.
+
+#+BEGIN_SRC python
+n = 9
+def make_adder(n):
+    return lambda k: k + n
+add_ten = make_adder(n+1)
+result = add_ten(n)
+#+END_SRC
+
+** Global Frame
+   n = 9 [parent=Global]
+   make_adder = func make_adder [parent=Global]
+   add_ten = func λ(k) [parent=f1]
+   result = 19
+** f1: make_adder [parent=Global]
+   n = 10
+   return value = func λ(k) [parent=f1]
+** f2: func λ(k) [parent=f1]
+   n = 9
+   return value = 19

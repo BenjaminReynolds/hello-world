@@ -5,3 +5,4 @@ __pycache__
 .ok_storage
 .ok_storage.db
 .ok_history
+.ok_guidance
