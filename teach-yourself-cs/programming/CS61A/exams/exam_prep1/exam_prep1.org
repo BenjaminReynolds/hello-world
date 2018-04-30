@@ -1,0 +1,98 @@
+* Question 2.1.
+
+#+BEGIN_SRC python
+from operator import add, mul
+def square(x):
+    return mul(x, x)
+
+def dog(bird):
+    def cow(tweet, moo):
+        woof = bird(tweet)
+        print(moo)
+        return woof
+    return cow
+
+cat = dog(square)
+#+END_SRC
+
+| Expression                | Evaluates to | Interactive Output |
+|---------------------------+--------------+--------------------|
+| square(5)                 | 25           |                 25 |
+| 1/0                       | ERROR        |              ERROR |
+| add(square(2), mul(3, 4)) | 16           |                 16 |
+| print(print(print(2)))    | None         |                  2 |
+|                           |              |               None |
+|                           |              |               None |
+| cat(3, 4)                 | 9            |                  4 |
+|                           |              |                  9 |
+| square(cat(5))            | ERROR        |              ERROR |
+| cat(square(2), print(5))  | 16           |                  5 |
+|                           |              |               None |
+|                           |              |                 16 |
+| cat(print(square(3)), 8)  | ERROR        |                  9 |
+|                           |              |              ERROR |
+
+* Question 3.1
+
+#+BEGIN_SRC python
+batman, superman, ivy = 1, -2 -3
+
+def nanana(batman):
+    while batman(superman) > ivy:
+        def batman(joker):
+            return ivy
+    return -ivy
+
+def joker(superman):
+    if superman(batman):
+          ivy =  -batman
+    return nanana
+
+joker(abs)(abs)
+#+END_SRC
+
+** Global frame
+   batman = 1
+   superman = -2
+   ivy = -3
+   joker = func joker(superman) [parent=Global]
+   nanana = func nanana(batman) [parent=Global]
+   func abs(...) [parent=Global]
+** f1: joker [parent=Global]
+   superman = func abs(...) [parent=Global]
+   ivy = -1
+   return value = func nanana(batman) [parent=Global]
+** f2: nanana [parent=Global]
+   batman = func batman(joker) [parent=f2]
+   return value = 3
+** f3 batman [parent=f2]
+   joker = -2
+   return value = -3
+* Question 3.2
+
+#+BEGIN_SRC python
+def peace(today):
+    harmony = love + 2
+    return harmony + today(love + 1)
+
+def joy(peace):
+    peace, love = peace + 2, peace + 1
+    return love // harmony
+
+love, harmony = 3, 2
+peace(joy)
+#+END_SRC
+
+** Global frame
+   peace = func peace(today) [parent=Global]
+   joy = func joy(peace) [parent=Global]
+   love = 3
+   harmony = 2
+** f1: peace(today) [parent=Global]
+   today = func joy(peace) [parent=Global]
+   harmony = 5
+   return value = 7
+** f2: joy(peace) [parent=Global]
+   peace = 6
+   love = 5
+   return value = 2
