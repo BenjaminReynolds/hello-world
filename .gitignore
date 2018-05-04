@@ -6,3 +6,6 @@ __pycache__
 .ok_storage.db
 .ok_history
 .ok_guidance
+/elm/*/elm-stuff/
+/elm/*/repl-temp-*
+/elm/*/elm.js
