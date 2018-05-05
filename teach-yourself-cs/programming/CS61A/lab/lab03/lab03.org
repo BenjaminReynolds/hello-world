@@ -1,0 +1,34 @@
+* Question 6
+
+#+BEGIN_SRC python
+wow = 6
+
+def much(wow):
+    if much == wow:
+        such = lambda wow: 5
+        def wow():
+            return such
+        return wow
+    such = lambda wow: 4
+    return wow()
+
+wow = much(much(much))(wow)
+#+END_SRC
+
+λ
+** Global Frame
+   wow = 5
+   much = func much(wow) [parent=Global]
+** f1: func much(wow) [parent=Globoal]
+   wow = func wow() [parent=f1]
+   such = func λ(wow) [parent=f1]
+   return value = func wow() [parent=f1]
+** f2: func much(wow) [parent=Global]
+   wow = func wow() [parent=f1]
+   such = func λ(wow) [parent=f2]
+   return value = func λ(wow) [parent=f1]
+** f3: func wow() [parent=f1]
+   return value = func λ(wow) [parent=f1]
+** f4: func λ(wow) [parent=f1]
+   wow = 6
+   return value = 5
