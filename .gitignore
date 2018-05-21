@@ -1,4 +1,4 @@
-/rust-book/*/target/
+/lang/rust/*/*/target/
 /teach-yourself-cs/computer-architecture/nand2tetris/tools
 ok
 __pycache__
@@ -6,6 +6,6 @@ __pycache__
 .ok_storage.db
 .ok_history
 .ok_guidance
-/elm/*/elm-stuff/
-/elm/*/repl-temp-*
-/elm/*/elm.js
+/lang/elm/*/elm-stuff/
+/lang/elm/*/repl-temp-*
+/lang/elm/*/elm.js
