@@ -16,6 +16,6 @@ __pycache__
 .ok_storage.db
 .ok_history
 .ok_guidance
-/lang/elm/*/elm-stuff/
-/lang/elm/*/repl-temp-*
-/lang/elm/*/elm.js
+elm-stuff
+repl-temp-*
+elm.js
