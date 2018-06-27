@@ -1,0 +1,3 @@
+[submodule "knowthen/elm"]
+	path = lang/elm/knowthen-elm-for-beginners
+	url = git@github.com:benreyn/elm.git
