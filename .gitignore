@@ -19,3 +19,4 @@ __pycache__
 elm-stuff
 repl-temp-*
 elm.js
+bower_components

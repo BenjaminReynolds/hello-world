@@ -2,6 +2,7 @@ module State exposing (..)
 
 import Misc exposing (..)
 import Navigation exposing (Location)
+import Ports exposing (..)
 import RemoteData exposing (WebData)
 import Rest
     exposing
@@ -25,21 +26,44 @@ emptyPost =
         |> Post tempPostId ""
 
 
-initialModel : Route -> Model
-initialModel route =
-    { posts = RemoteData.Loading
+initialModel : WebData (List Post) -> Route -> Model
+initialModel posts route =
+    { posts = posts
     , currentRoute = route
     , newPost = emptyPost
     }
 
 
-init : Location -> ( Model, Cmd Msg )
-init location =
+init : Maybe (List Post) -> Location -> ( Model, Cmd Msg )
+init flags location =
     let
         currentRoute =
             Routing.extractRoute location
+
+        posts =
+            case flags of
+                Just listOfPosts ->
+                    RemoteData.succeed listOfPosts
+
+                Nothing ->
+                    RemoteData.Loading
     in
-        ( initialModel currentRoute, fetchPostsCommand )
+        ( initialModel posts currentRoute, Cmd.none )
+
+
+updateWithStorage : Msg -> Model -> ( Model, Cmd Msg )
+updateWithStorage msg model =
+    let
+        ( newModel, commands ) =
+            update msg model
+
+        extractedPosts =
+            RemoteData.toMaybe newModel.posts
+                |> Maybe.withDefault []
+    in
+        ( newModel
+        , Cmd.batch [ commands, storePosts extractedPosts ]
+        )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )

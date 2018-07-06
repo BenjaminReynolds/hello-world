@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="bower_components/google-map/google-map.html">
+    <link rel="import" href="bower_components/google-map/google-map-marker.html">
 
     <style>
-     .jumbotron {
-       background-color: #e6ffe6;
-       text-align: center;
+     google-map {
+       height: 400px;
      }
     </style>
   </head>
-
   <body>
     <div id="elm-code-is-loaded-here"></div>
-
-    <script src="./elm.js"></script>
-    <script src="./experiment.js"></script>
-    <script src="./dom-performance-test.js"></script>
+    <script src="elm.js"></script>
     <script>
-     Elm.Main.embed(document.getElementById("elm-code-is-loaded-here"));
+     var element = document.getElementById("elm-code-is-loaded-here");
+     var app = Elm.CustomElements.embed(element);
     </script>
   </body>
 </html>
