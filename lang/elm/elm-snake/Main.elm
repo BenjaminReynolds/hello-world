@@ -1,7 +1,6 @@
 module Main exposing (..)
 
 import Html
-import Html.App as App
 import Html.Attributes exposing (style)
 import Keyboard
 import Random
@@ -13,7 +12,7 @@ import Window
 
 
 main =
-    App.program
+    Html.program
         { init = ( init, initCmds )
         , update = update
         , view = view
@@ -236,7 +235,7 @@ updateSnake ( game, cmd ) =
         head =
             snakeHead game.snake
 
-        head' =
+        head_ =
             case game.direction of
                 Up ->
                     { head | y = head.y - 1 }
@@ -262,13 +261,13 @@ updateSnake ( game, cmd ) =
         tailYs =
             List.map .y tailPositions
 
-        tail' =
+        tail_ =
             List.map2 Block tailXs tailYs
     in
         if game.isDead then
             ( game, cmd )
         else
-            ( { game | snake = head' :: tail' }, cmd )
+            ( { game | snake = head_ :: tail_ }, cmd )
 
 
 updateDirection : Keys -> Game -> Game
@@ -277,7 +276,7 @@ updateDirection key game =
         { direction } =
             game
 
-        direction' =
+        direction_ =
             if key == LeftKey && direction /= Right then
                 Left
             else if key == RightKey && direction /= Left then
@@ -289,7 +288,7 @@ updateDirection key game =
             else
                 direction
     in
-        { game | direction = direction' }
+        { game | direction = direction_ }
 
 
 
@@ -303,7 +302,7 @@ subscriptions game =
 
 initCmds : Cmd Msg
 initCmds =
-    Task.perform SizeUpdated SizeUpdated Window.size
+    Task.perform SizeUpdated Window.size
 
 
 windowDimensionsChanged : Sub Msg
