@@ -350,7 +350,7 @@ size =
 
 backgroundColor : Attribute Msg
 backgroundColor =
-    fill "#c1c1c1"
+    fill "#9fd0b3"
 
 
 view : Game -> Html.Html Msg
@@ -383,7 +383,7 @@ renderBlock block =
         ( strX, strY ) =
             ( toString block.x, toString block.y )
     in
-        rect [ x strX, y strY, width "1", height "1", fill "#44e241", rx "0.2" ] []
+        rect [ x strX, y strY, width "1", height "1", fill "#28372a", rx "0.1" ] []
 
 
 renderApple : Maybe Block -> List (Svg Msg)
