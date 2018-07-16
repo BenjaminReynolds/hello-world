@@ -335,7 +335,7 @@ toArrowChanged code =
         40 ->
             ArrowPressed DownKey
 
-        default ->
+        _ ->
             ArrowPressed NoKey
 
 
