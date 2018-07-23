@@ -11,6 +11,7 @@ import Time exposing (Time)
 import Window
 
 
+main : Program Never Game Msg
 main =
     Html.program
         { init = ( init, initCmds )
@@ -31,6 +32,7 @@ type alias Game =
     , isDead : Bool
     , apple : Maybe Block
     , ateApple : Bool
+    , isPaused : Bool
     }
 
 
@@ -57,6 +59,7 @@ type Keys
     | DownKey
     | LeftKey
     | RightKey
+    | SpaceKey
 
 
 type alias AppleSpawn =
@@ -81,6 +84,7 @@ init =
     , isDead = False
     , apple = Nothing
     , ateApple = False
+    , isPaused = False
     }
 
 
@@ -89,7 +93,7 @@ init =
 
 
 type Msg
-    = ArrowPressed Keys
+    = KeyPressed Keys
     | SizeUpdated Window.Size
     | Tick Time
     | MaybeSpawnApple AppleSpawn
@@ -98,8 +102,8 @@ type Msg
 update : Msg -> Game -> ( Game, Cmd Msg )
 update msg game =
     case msg of
-        ArrowPressed arrow ->
-            ( updateDirection arrow game, Cmd.none )
+        KeyPressed key ->
+            ( updateFromKey key game, Cmd.none )
 
         SizeUpdated dimensions ->
             ( { game | dimensions = dimensions }, Cmd.none )
@@ -264,20 +268,30 @@ updateSnake ( game, cmd ) =
         tail_ =
             List.map2 Block tailXs tailYs
     in
-        if game.isDead then
+        if game.isDead || game.isPaused then
             ( game, cmd )
         else
             ( { game | snake = head_ :: tail_ }, cmd )
 
 
-updateDirection : Keys -> Game -> Game
-updateDirection key game =
+updateFromKey : Keys -> Game -> Game
+updateFromKey key game =
     let
         { direction } =
             game
 
+        isPaused_ =
+            if key == SpaceKey && game.isPaused then
+                False
+            else if key == SpaceKey && not game.isPaused then
+                True
+            else
+                game.isPaused
+
         direction_ =
-            if key == LeftKey && direction /= Right then
+            if game.isPaused then
+                direction
+            else if key == LeftKey && direction /= Right then
                 Left
             else if key == RightKey && direction /= Left then
                 Right
@@ -288,7 +302,7 @@ updateDirection key game =
             else
                 direction
     in
-        { game | direction = direction_ }
+        { game | direction = direction_, isPaused = isPaused_ }
 
 
 
@@ -323,20 +337,23 @@ arrowChanged =
 toArrowChanged : Keyboard.KeyCode -> Msg
 toArrowChanged code =
     case code of
+        32 ->
+            KeyPressed SpaceKey
+
         37 ->
-            ArrowPressed LeftKey
+            KeyPressed LeftKey
 
         38 ->
-            ArrowPressed UpKey
+            KeyPressed UpKey
 
         39 ->
-            ArrowPressed RightKey
+            KeyPressed RightKey
 
         40 ->
-            ArrowPressed DownKey
+            KeyPressed DownKey
 
         _ ->
-            ArrowPressed NoKey
+            KeyPressed NoKey
 
 
 
