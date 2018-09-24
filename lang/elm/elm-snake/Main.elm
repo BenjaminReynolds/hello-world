@@ -381,12 +381,24 @@ view game =
     in
         svg
             [ width scaledWidth, height scaledHeight, viewBox "0 0 50 50", parentStyle ]
-            ([ renderBackground ] ++ renderSnake game.snake ++ renderApple game.apple)
+            ([ renderBackground ]
+                ++ [ renderMenu game.isPaused ]
+                ++ renderSnake game.snake
+                ++ renderApple game.apple
+            )
 
 
 renderBackground : Svg Msg
 renderBackground =
     rect [ x "0", y "0", width size, height size, backgroundColor ] []
+
+
+renderMenu : Bool -> Svg Msg
+renderMenu isPaused =
+    if isPaused then
+        text_ [ x "50%", y "50%", fontSize "5", textAnchor "middle", fontFamily "monospace" ] [ text "Paused" ]
+    else
+        text_ [] []
 
 
 renderSnake : Snake -> List (Svg Msg)
