@@ -2,6 +2,7 @@
 name = "twelve_days"
 version = "0.1.0"
 authors = ["Benjamin Reynolds <breyno127@gmail.com>"]
+edition = "2018"
 
 [dependencies]
 ordinal = "0.2.2"

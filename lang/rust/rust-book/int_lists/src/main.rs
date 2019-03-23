@@ -7,7 +7,7 @@ fn main() {
     mode_of_list(&list_of_integers);
 }
 
-fn mean_of_list(list: &Vec<usize>) {
+fn mean_of_list(list: &[usize]) {
     let mut total = 0;
     for i in list.iter() {
         total += i;
@@ -16,15 +16,15 @@ fn mean_of_list(list: &Vec<usize>) {
     println!("{}", mean);
 }
 
-fn median_of_list(list: &Vec<usize>) {
-    let mut sorted_list = list.clone();
+fn median_of_list(list: &[usize]) {
+    let mut sorted_list = list.to_owned();
     sorted_list.sort();
     let mid_point = list.len() / 2;
     let median = sorted_list[mid_point];
     println!("{}", median);
 }
 
-fn mode_of_list(list: &Vec<usize>) {
+fn mode_of_list(list: &[usize]) {
     let mut counts = HashMap::new();
     let mut most = 1;
     let mut mode = 0;
