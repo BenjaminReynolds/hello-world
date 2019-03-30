@@ -1,0 +1,12 @@
+[lib]
+proc-macro = true
+
+[package]
+name = "hello_macro_derive"
+version = "0.1.0"
+authors = ["Benjamin Reynolds <breyno127@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+syn = "0.14.4"
+quote = "0.6.4"
