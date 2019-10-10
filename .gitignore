@@ -9,6 +9,13 @@
 
 .DS_Store
 /lang/rust/*/*/target/
+/lang/rust/*/*/target/
+/lang/rust/*/rust-wasm/*/pkg/
+/lang/rust/*/rust-wasm/*/bin/
+/lang/rust/*/rust-wasm/*/wasm-pack.log
+/lang/rust/*/rust-wasm/*/**/*.rs.bk
+/lang/rust/*/rust-wasm/*/www/node_modules/
+/lang/rust/*/rust-wasm/*/www/dist/
 /teach-yourself-cs/computer-architecture/nand2tetris/tools
 ok
 __pycache__
