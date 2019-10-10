@@ -11,6 +11,9 @@ const universe = Universe.new();
 const width = universe.width();
 const height = universe.height();
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 // Give the canvas room for all of our cells and a 1px border
 // around each of them.
 const canvas = document.getElementById("game-of-life-canvas")
@@ -19,7 +22,8 @@ canvas.width = (CELL_SIZE + 1) * width + 1;
 
 const ctx = canvas.getContext('2d');
 
-const renderLoop = () => {
+async function renderLoop() {
+  await sleep(100);
   universe.tick();
 
   drawGrid();
