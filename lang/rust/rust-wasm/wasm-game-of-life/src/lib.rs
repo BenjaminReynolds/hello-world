@@ -138,6 +138,19 @@ impl Universe {
         self.cells = (0..height * self.width).map(|_| Cell::Dead).collect();
     }
 
+    pub fn new_blank() -> Universe {
+        let width = 64;
+        let height = 64;
+        let size = (height * width) as usize;
+        let cells = vec![Cell::Dead; size];
+
+        Universe {
+            width,
+            height,
+            cells,
+        }
+    }
+
     pub fn new() -> Universe {
         utils::set_panic_hook();
         let width = 64;

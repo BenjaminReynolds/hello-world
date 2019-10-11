@@ -7,13 +7,9 @@ const DEAD_COLOR = "#FFFFFF";
 const ALIVE_COLOR = "#000000";
 
 // construct the universe, and get its width and height.
-const universe = Universe.new_random();
+let universe = Universe.new_random();
 const width = universe.width();
 const height = universe.height();
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 // Give the canvas room for all of our cells and a 1px border
 // around each of them.
@@ -25,8 +21,35 @@ const ctx = canvas.getContext('2d');
 
 let animationId = null;
 
+const ticksPerFrameInput = document.getElementById("ticks-per-frame");
+let tickCount = 0;
+let ticksPerFrame = 0;
+const setTicksPerFrame = () => {
+  ticksPerFrame = parseInt(ticksPerFrameInput.value);
+};
+setTicksPerFrame();
+
+ticksPerFrameInput.addEventListener("input", event => {
+  setTicksPerFrame();
+});
+
+const blankUniverseButton = document.getElementById("blank-universe");
+blankUniverseButton.addEventListener("click", event => {
+  universe = Universe.new_blank()
+})
+
+const randomUniverseButton = document.getElementById("random-universe");
+randomUniverseButton.addEventListener("click", event => {
+  universe = Universe.new_random()
+})
+
 const renderLoop = () => {
-  universe.tick();
+  tickCount += 1;
+
+  if (tickCount === ticksPerFrame) {
+    universe.tick();
+    tickCount = 0;
+  }
 
   drawGrid();
   drawCells();
@@ -40,12 +63,12 @@ const isPaused = () => {
 
 const playPauseButton = document.getElementById("play-pause");
 const play = () => {
-  playPauseButton.textContent = "⏸";
+  playPauseButton.textContent = "Pause";
   renderLoop();
 };
 
 const pause = () => {
-  playPauseButton.textContent = "▶";
+  playPauseButton.textContent = "Play";
   cancelAnimationFrame(animationId);
   animationId = null;
 };
