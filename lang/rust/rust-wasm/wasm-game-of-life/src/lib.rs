@@ -104,6 +104,65 @@ impl Universe {
         }
     }
 
+    pub fn new_random() -> Universe {
+        let width = 64;
+        let height = 64;
+
+        let cells = (0..width * height)
+            .map(|_| {
+                if js_sys::Math::random() < 0.5 {
+                    Cell::Alive
+                } else {
+                    Cell::Dead
+                }
+            })
+            .collect();
+
+        Universe {
+            width,
+            height,
+            cells,
+        }
+    }
+
+    pub fn new_with_spaceship() -> Universe {
+        let width = 64;
+        let height = 64;
+        let size = (height * width) as usize;
+        let spaceship_coordinates = [
+            (1, 3),
+            (1, 4),
+            (1, 5),
+            (2, 2),
+            (2, 5),
+            (3, 5),
+            (4, 1),
+            (4, 5),
+            (5, 5),
+            (6, 2),
+            (6, 4),
+        ];
+
+        let mut cells: Vec<Cell> = vec![Cell::Dead; size];
+
+        let universe = Universe {
+            width,
+            height,
+            cells: Vec::new(),
+        };
+
+        for (j, k) in spaceship_coordinates.iter() {
+            let index = universe.get_index(*j, *k);
+            cells[index] = Cell::Alive;
+        }
+
+        Universe {
+            width,
+            height,
+            cells,
+        }
+    }
+
     pub fn render(&self) -> String {
         self.to_string()
     }
